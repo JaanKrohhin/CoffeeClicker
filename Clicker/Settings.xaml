@@ -3,10 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Clicker.Settings">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Label Text="User Settings" FontSize="Title" HorizontalOptions="Center" FontAttributes="Bold"/>
+            <Label Text="Theme Selector" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Italic"/>
+            <ListView x:Name="colourList" HeightRequest="200">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <FlexLayout JustifyContent="Center">
+                                <BoxView BackgroundColor="{Binding NavBar}" CornerRadius="360"></BoxView>
+                                <BoxView BackgroundColor="{Binding Background}"  CornerRadius="360"></BoxView>
+                                <BoxView BackgroundColor="{Binding TextColour}"  CornerRadius="360"></BoxView>
+                            </FlexLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Select" Clicked="Button_Clicked" HorizontalOptions="Center" CornerRadius="100"></Button>
+            <Label Text="Data erasure" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Italic"/>
+            <Label Text="If you desire to start over from scratch, you may press the button below to erase all your progress until this point. This action cannot be undone." FontSize="Body" HorizontalOptions="Center" Margin="10,0"/>
+            <Button Text="ERASE ALL DATA" FontAttributes="Bold" Clicked="Button_Clicked_1" ></Button>
+            <Label Text="Copyright" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Italic" Margin="0" />
+            <Label Text="This product belongs to the creator Jaan Krohhin. If you want to add a feature please contact the creator via his portfolio." HeightRequest="200" Margin="10,0"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

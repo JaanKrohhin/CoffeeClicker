@@ -4,8 +4,9 @@
              x:Class="Clicker.ClickerScreen">
 
     <StackLayout Margin="0,10,0,0">
-        <Label HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold">SUPER CLICKER</Label>
-        <ImageButton CornerRadius="360" HorizontalOptions="Center" Source="coffee.png" Clicked="ImageButton_Clicked" Aspect="Fill" Pressed="ImageButton_Pressed" VerticalOptions="CenterAndExpand" WidthRequest="250" HeightRequest="250"></ImageButton>
+        <Label HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Text="Coffee Clicker"></Label>
+        <Label x:Name="pointLabel" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+        <ImageButton x:Name="imgBtn" CornerRadius="360" HorizontalOptions="Center" Source="coffee.png" Clicked="ImageButton_Clicked" Aspect="Fill" Pressed="ImageButton_Pressed" VerticalOptions="CenterAndExpand" WidthRequest="250" HeightRequest="250" Released="imgBtn_Released"></ImageButton>
     </StackLayout>
 
 </ContentPage>

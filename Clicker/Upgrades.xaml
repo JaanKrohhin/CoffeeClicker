@@ -3,13 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Clicker.Upgrades">
     <ContentPage.Content>
-        <StackLayout>
-            <FlexLayout JustifyContent="SpaceBetween">
-                <Label Text="{Binding Name}"></Label>
-                <Label Text="{Binding Description}"></Label>
-                <Label Text="{Binding Value}"></Label>
-                <Button Text="Buy" Clicked="Button_Clicked"></Button>
-            </FlexLayout>
+        <StackLayout VerticalOptions="Fill">
+            <Label Text="Upgrade store" FontSize="Title" HorizontalOptions="Center"></Label>
+            <Label Text="Purchase permanent upgrades" FontSize="Subtitle"  HorizontalOptions="Center" Margin="0,0,0,10"/>
+            <ListView x:Name="upgradeList" RowHeight="100" HasUnevenRows="True" SelectionMode="None" HeightRequest="1000">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <FlexLayout JustifyContent="SpaceBetween" Margin="0,5">
+                                <StackLayout Margin="5,0,0,0" WidthRequest="300">
+                                    <FlexLayout>
+                                        <Image Source="{Binding Picture}" HeightRequest="25" WidthRequest="25"></Image>
+                                        <Label Text="{Binding Name}" FontSize="Default" FontAttributes="Bold"></Label>
+                                    </FlexLayout>
+                                    <Label Text="{Binding Price, StringFormat='Cost: {0}'}" FontSize="Default" FontAttributes="Italic"></Label>
+                                    <Label Text="{Binding Description}" FontSize="Body"></Label>
+                                </StackLayout>
+                                <Button Text="{Binding Value, StringFormat='Buy {0}x'}" Clicked="Upgrade_Clicked" Margin="0,0,5,0"></Button>
+                            </FlexLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="Purchase colour themes" FontSize="Subtitle"  HorizontalOptions="Center"></Label>
+            <ListView x:Name="colourList" VerticalOptions="FillAndExpand" SelectionMode="None" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <FlexLayout JustifyContent="Center">
+                                <BoxView BackgroundColor="{Binding NavBar}" CornerRadius="360"></BoxView>
+                                <BoxView BackgroundColor="{Binding Background}"  CornerRadius="360"></BoxView>
+                                <BoxView BackgroundColor="{Binding TextColour}"  CornerRadius="360"></BoxView>
+                                <Button Text="{Binding Price, StringFormat='Buy for {0}p'}" Clicked="ColorPurchase"></Button>
+                            </FlexLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
