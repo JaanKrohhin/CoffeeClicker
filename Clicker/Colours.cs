@@ -12,5 +12,6 @@ namespace Clicker
         public string TextColour { get; set; }
         public int Price { get; set; }
         public bool Purchased { get; set; }
+        public bool IsActive { get; set; }
     }
 }

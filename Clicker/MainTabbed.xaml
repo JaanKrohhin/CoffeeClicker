@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Clicker"
-            x:Class="Clicker.MainTabbed">
+            x:Class="Clicker.MainTabbed"
+            BarBackgroundColor="{Binding NavBar}"
+            BackgroundColor="{Binding Background}"
+            BarTextColor="{Binding TextColour}">
   <!--Pages can be added as references or inline-->
     <local:ClickerScreen IconImageSource="clicker.png"></local:ClickerScreen>
     <local:Upgrades IconImageSource="upgrade.png"></local:Upgrades>
     <local:Settings IconImageSource="settings.png"></local:Settings>
+    
 </TabbedPage>

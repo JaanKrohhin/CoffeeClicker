@@ -28,6 +28,7 @@ namespace Clicker
         private void Upgrades_Appearing(object sender, EventArgs e)
         {
             UpdateLists();
+            this.BindingContext = (Colour)App.Current.MainPage.BindingContext;
         }
         public void UpdateLists()
         {
@@ -54,14 +55,15 @@ namespace Clicker
             Upgrade down = (Upgrade)((Button)sender).BindingContext;
             if (App.TotalPointsOfTheUser >= down.Price)
             {
+                Random rnd = new Random();
                 var DoubleCorrectionVariable = down.Value;
                 if (down.Value == 0.5)
                 {
                     DoubleCorrectionVariable = down.Value + 1;
                 }
-                App.MultiplierOfPoints *= DoubleCorrectionVariable;
+                App.MultiplierOfPoints += DoubleCorrectionVariable;
                 App.TotalPointsOfTheUser -= down.Price;
-                down.Price *= 2;
+                down.Price *= rnd.Next(2, 6); ;
                 if (down.OneTimePurchase == 1)
                 {
                     down.OneTimePurchase = 2;

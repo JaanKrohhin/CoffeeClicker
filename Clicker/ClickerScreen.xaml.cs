@@ -24,6 +24,7 @@ namespace Clicker
 
         private void ClickerScreen_Appearing(object sender, EventArgs e)
         {
+            this.BindingContext = (Colour)App.Current.MainPage.BindingContext;
             pointLabel.Text = ((int)App.TotalPointsOfTheUser).ToString()+"p";
             multLabel.Text = App.MultiplierOfPoints.ToString() + "x";
         }

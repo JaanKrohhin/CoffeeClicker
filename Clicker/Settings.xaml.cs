@@ -22,9 +22,15 @@ namespace Clicker
             InitializeComponent();
             using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
             {
-                Colours = new ObservableCollection<Colour>(App.db.Table<Colour>().ToList());
+                Colours = new ObservableCollection<Colour>((from c in App.db.Table<Colour>().ToList() where c.Purchased == true select c).ToList<Colour>());
             }
             colourList.ItemsSource = Colours;
+            this.Appearing += Settings_Appearing;
+        }
+
+        private void Settings_Appearing(object sender, EventArgs e)
+        {
+            this.BindingContext = (Colour)App.Current.MainPage.BindingContext;
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -39,10 +45,10 @@ namespace Clicker
                 App.db.DropTable<Upgrade>();
                 App.db.DropTable<Colour>();
             }
-            Preferences.Remove("Hold");
-            Preferences.Remove("Multiplier");
-            Preferences.Remove("TotalPoints");
+            Preferences.Clear();
             App.CheckDbTablesExistance();
+            App.TotalPointsOfTheUser = 0;
+            App.MultiplierOfPoints = 1;
         }
     }
     
