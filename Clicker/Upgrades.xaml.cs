@@ -21,14 +21,8 @@ namespace Clicker
         public Upgrades()
         {
             InitializeComponent();
-            using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
-            { 
-                StoreUpgrades = new ObservableCollection<Upgrade>(App.db.Table<Upgrade>().ToList());
-                Colours = new ObservableCollection<Colour>(App.db.Table<Colour>().ToList());
-            }
-            upgradeList.ItemsSource = StoreUpgrades;
-            colourList.ItemsSource = Colours;
-            //this.Appearing += Upgrades_Appearing;
+            UpdateLists();
+            this.Appearing += Upgrades_Appearing;
         }
 
         private void Upgrades_Appearing(object sender, EventArgs e)
@@ -39,11 +33,21 @@ namespace Clicker
         {
             using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
             {
-                StoreUpgrades = (ObservableCollection<Upgrade>)(from u in App.db.Table<Upgrade>().ToList() where u.OneTimePurchase < 2 select u);
-                Colours = (ObservableCollection<Colour>)(from c in App.db.Table<Colour>().ToList() where c.Purchased=false select c);
+                StoreUpgrades = UpgradeSort();
+                Colours = ColourSort();
             }
             upgradeList.ItemsSource = StoreUpgrades;
             colourList.ItemsSource = Colours;
+        }
+        private ObservableCollection<Colour> ColourSort()
+        {
+            var a = (from c in App.db.Table<Colour>().ToList() where c.Purchased == false select c).ToList<Colour>();
+            return new ObservableCollection<Colour>(a);
+        }
+        private ObservableCollection<Upgrade> UpgradeSort()
+        {
+            var a = (from c in App.db.Table<Upgrade>() where c.OneTimePurchase < 2 select c).ToList<Upgrade>();
+            return new ObservableCollection<Upgrade>(a);
         }
         private async void Upgrade_Clicked(object sender, EventArgs e)
         {
@@ -68,7 +72,7 @@ namespace Clicker
                 using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
                 {
                     App.db.Update(down);
-                    StoreUpgrades = new ObservableCollection<Upgrade>(App.db.Table<Upgrade>().ToList());
+                    StoreUpgrades = UpgradeSort();
                     upgradeList.ItemsSource = StoreUpgrades;
                 }
             }
@@ -76,6 +80,7 @@ namespace Clicker
             {
                 await DisplayAlert("Purchase", "Not enough points", "Ok");
             }
+            
         }
         private void ColorPurchase(object sender, EventArgs e)
         {
@@ -88,8 +93,8 @@ namespace Clicker
                 using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
                 {
                     App.db.Update(col);
-                    StoreUpgrades = new ObservableCollection<Upgrade>(App.db.Table<Upgrade>().ToList());
-                    upgradeList.ItemsSource = StoreUpgrades;
+                    Colours = ColourSort();
+                    colourList.ItemsSource = Colours;
                 }
             }
         }

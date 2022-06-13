@@ -1,6 +1,9 @@
-﻿using SQLite;
+﻿using Android.Content;
+using Android.Preferences;
+using SQLite;
 using System;
 using System.IO;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,16 +24,26 @@ namespace Clicker
 
         protected override void OnStart()
         {
-            TotalPointsOfTheUser = 1;
-            MultiplierOfPoints = 1;
+            if (Preferences.Get("TotalPoints", null) == null || Preferences.Get("Multiplier", null) == null)
+            {
+                Preferences.Set("TotalPoints", TotalPointsOfTheUser.ToString());
+                Preferences.Set("Multiplier", MultiplierOfPoints.ToString());
+            }
+            TotalPointsOfTheUser = Preferences.Get("TotalPoints", TotalPointsOfTheUser);
+            MultiplierOfPoints = Preferences.Get("Multiplier", MultiplierOfPoints);
         }
 
         protected override void OnSleep()
         {
+            Preferences.Set("TotalPoints", TotalPointsOfTheUser.ToString());
+            Preferences.Set("Multiplier", MultiplierOfPoints.ToString());
         }
 
         protected override void OnResume()
         {
+            TotalPointsOfTheUser = Preferences.Get("TotalPoints", TotalPointsOfTheUser);
+            MultiplierOfPoints = Preferences.Get("Multiplier", MultiplierOfPoints);
+
         }
         public static void CheckDbTablesExistance()
         {

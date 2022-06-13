@@ -17,13 +17,15 @@ namespace Clicker
         {
             InitializeComponent();
             canHoldTheButton = false;
-            pointLabel.Text = App.TotalPointsOfTheUser.ToString();
+            pointLabel.Text = ((int)App.TotalPointsOfTheUser).ToString() + "p";
+            multLabel.Text = App.MultiplierOfPoints.ToString() + "x";
             this.Appearing += ClickerScreen_Appearing;
         }
 
         private void ClickerScreen_Appearing(object sender, EventArgs e)
         {
             pointLabel.Text = ((int)App.TotalPointsOfTheUser).ToString()+"p";
+            multLabel.Text = App.MultiplierOfPoints.ToString() + "x";
         }
 
         private void ImageButton_Clicked(object sender, EventArgs e) { AddPoints();       }
@@ -46,10 +48,13 @@ namespace Clicker
         public void AddPoints()
         {
             App.TotalPointsOfTheUser += 1 * App.MultiplierOfPoints;
-            pointLabel.Text = ((int)App.TotalPointsOfTheUser).ToString();
+            pointLabel.Text = ((int)App.TotalPointsOfTheUser).ToString() + "p";
         }
 
-
+        public void MultUpdate(Label multLabel)
+        {
+            multLabel.Text = App.MultiplierOfPoints.ToString() + "x";
+        }
         private void imgBtn_Released(object sender, EventArgs e)
         {
             isHoldingThebutton = false;
