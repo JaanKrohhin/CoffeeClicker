@@ -20,22 +20,37 @@ namespace Clicker
         public Settings()
         {
             InitializeComponent();
-            using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
-            {
-                Colours = new ObservableCollection<Colour>((from c in App.db.Table<Colour>().ToList() where c.Purchased == true select c).ToList<Colour>());
-            }
+            Colours = GetList();
             colourList.ItemsSource = Colours;
             this.Appearing += Settings_Appearing;
         }
-
+        public ObservableCollection<Colour> GetList()
+        {
+            var a = new ObservableCollection<Colour>();
+            using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
+            {
+                a = new ObservableCollection<Colour>((from c in App.db.Table<Colour>() where c.Purchased == true select c).ToList<Colour>() );
+            }
+            return a;
+        }
         private void Settings_Appearing(object sender, EventArgs e)
         {
+            colourList.ItemsSource = GetList();
             this.BindingContext = (Colour)App.Current.MainPage.BindingContext;
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-
+            var a = colourList.SelectedItem as Colour;
+            var b = (Colour)App.Current.MainPage.BindingContext;
+            b.IsActive = false;
+            a.IsActive = true;
+            using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
+            {
+                App.db.Update(b);
+                App.db.Update(a);
+            }
+            App.Current.MainPage.BindingContext = a;
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)

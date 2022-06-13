@@ -74,8 +74,6 @@ namespace Clicker
                     Preferences.Set("Hold", true);
                 }
                 await DisplayAlert("Purchase", down.Name, "Ok");
-                //save to db
-                //update list
                 using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
                 {
                     App.db.Update(down);
@@ -95,8 +93,6 @@ namespace Clicker
             if (App.TotalPointsOfTheUser >= col.Price)
             {
                 col.Purchased = true;
-                //save to db
-                //update list
                 using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
                 {
                     App.db.Update(col);

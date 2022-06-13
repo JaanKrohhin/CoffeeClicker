@@ -52,7 +52,7 @@ namespace Clicker
                 db.CreateTable<Upgrade>();
                 if (db.Table<Colour>().Count() == 0)
                 {
-                    foreach (var item in new Colour[] { new Colour { id = 1, NavBar = "#A48E59", Background = "#598AA6", TextColour = "#5C59A6", Price = 2 }, new Colour { id = 2, NavBar = "#2B72D5", Background = "#D5552A", TextColour = "#D5C72A", Price = 2 }, new Colour { id = 3, NavBar = "#075C0C", Background = "#44075A", TextColour = "#5A0739", Price = 2 }, new Colour { id = 4, NavBar = "#BA0029", Background = "#00B853", TextColour = "#00A2B8" }, new Colour { id = 5, NavBar = "Blue", Background = "White", TextColour = "Grey", Price = 2, Purchased = true, IsActive = true } })
+                    foreach (var item in new Colour[] { new Colour { id = 1, NavBar = "#A48E59", Background = "#598AA6", TextColour = "#5C59A6", Price = 2 }, new Colour { id = 2, NavBar = "#2B72D5", Background = "#D5552A", TextColour = "#D5C72A", Price = 2 }, new Colour { id = 3, NavBar = "#075C0C", Background = "#44075A", TextColour = "#5A0739", Price = 2 }, new Colour { id = 4, NavBar = "#BA0029", Background = "#00B853", TextColour = "#00A2B8" }, new Colour { id = 5, NavBar = "Blue", Background = "White", TextColour = "Gray", Price = 2, Purchased = true, IsActive = true } })
                     {
                         db.Insert(item);
                     }
