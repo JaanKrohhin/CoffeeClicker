@@ -4,9 +4,12 @@
              x:Class="Clicker.Upgrades">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <FlexLayout JustifyContent="SpaceBetween">
+                <Label Text="{Binding Name}"></Label>
+                <Label Text="{Binding Description}"></Label>
+                <Label Text="{Binding Value}"></Label>
+                <Button Text="Buy" Clicked="Button_Clicked"></Button>
+            </FlexLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
