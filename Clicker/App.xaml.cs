@@ -26,8 +26,9 @@ namespace Clicker
         {
             if (Preferences.Get("TotalPoints", null) == null || Preferences.Get("Multiplier", null) == null)
             {
-                Preferences.Set("TotalPoints", TotalPointsOfTheUser.ToString());
-                Preferences.Set("Multiplier", MultiplierOfPoints.ToString());
+                Preferences.Set("TotalPoints", 0.ToString());
+                Preferences.Set("Multiplier", 1.ToString());
+                Preferences.Set("Hold", false);
             }
             TotalPointsOfTheUser = Preferences.Get("TotalPoints", TotalPointsOfTheUser);
             MultiplierOfPoints = Preferences.Get("Multiplier", MultiplierOfPoints);
@@ -61,7 +62,7 @@ namespace Clicker
                 }
                 if (db.Table<Upgrade>().Count() == 0)
                 {
-                    foreach (var item in new Upgrade[] { new Upgrade { id = 1, Name = "Milk", Description = "Coffee & Milk, a classic", OneTimePurchase = 0, Value = 2, Picture = "clicker.png", Price = 10 }, new Upgrade { id = 2, Name = "Sugar", Description = "Spice up your life with some sweet sugar", OneTimePurchase = 0, Value = 2, Picture = "clicker.png", Price = 10 }, new Upgrade { id = 3, Name = "Coffee beans", Description = "Imagine the flavor", OneTimePurchase = 0, Value = 0.5, Picture = "clicker.png", Price = 10 }, new Upgrade { id = 4, Name = "Premium cup", Description = "Bigger, better, stronger cup", OneTimePurchase = 1, Value = 2, Price = 10 }, })
+                    foreach (var item in new Upgrade[] { new Upgrade { id = 1, Name = "Milk", Description = "Coffee & Milk, a classic", OneTimePurchase = 0, Value = 2, Picture = "clicker.png", Price = 10 }, new Upgrade { id = 2, Name = "Sugar", Description = "Spice up your life with some sweet sugar", OneTimePurchase = 0, Value = 2, Picture = "clicker.png", Price = 10 }, new Upgrade { id = 3, Name = "Coffee beans", Description = "Imagine the flavor", OneTimePurchase = 0, Value = 0.5, Picture = "clicker.png", Price = 10 }, new Upgrade { id = 4, Name = "Premium cup", Description = "Bigger, better, stronger cup", OneTimePurchase = 1, Value = 2, Price = 10 }, new Upgrade { id = 5, Name = "Golden Hand", Description = "Do you wanna stop clicking?", Picture = "clicker.png", Price = 10, OneTimePurchase = 1} })
                     {
                         db.Insert(item);
                     }

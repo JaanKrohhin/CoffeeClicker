@@ -5,18 +5,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Clicker
 {
     public partial class ClickerScreen : ContentPage
     {
-        public bool canHoldTheButton;
+        public static bool canHoldTheButton = Preferences.Get("Hold", false);
         bool isHoldingThebutton = false;
         public ClickerScreen()
         {
             InitializeComponent();
-            canHoldTheButton = false;
             pointLabel.Text = ((int)App.TotalPointsOfTheUser).ToString() + "p";
             multLabel.Text = App.MultiplierOfPoints.ToString() + "x";
             this.Appearing += ClickerScreen_Appearing;

@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -65,6 +65,11 @@ namespace Clicker
                 if (down.OneTimePurchase == 1)
                 {
                     down.OneTimePurchase = 2;
+                }
+                if (down.Name == "Golden Hand")
+                {
+                    ClickerScreen.canHoldTheButton = true;
+                    Preferences.Set("Hold", true);
                 }
                 await DisplayAlert("Purchase", down.Name, "Ok");
                 //save to db

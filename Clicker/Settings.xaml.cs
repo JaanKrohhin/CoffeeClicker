@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Android.Preferences;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -38,6 +39,9 @@ namespace Clicker
                 App.db.DropTable<Upgrade>();
                 App.db.DropTable<Colour>();
             }
+            Preferences.Remove("Hold");
+            Preferences.Remove("Multiplier");
+            Preferences.Remove("TotalPoints");
             App.CheckDbTablesExistance();
         }
     }
