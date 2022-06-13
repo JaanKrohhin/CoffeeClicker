@@ -16,29 +16,30 @@ namespace Clicker
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Settings : ContentPage
     {
-        public ObservableCollection<Colour> Colours { get; set; }
+        public static ObservableCollection<Colour> Colours { get; set; }
         public Settings()
         {
             InitializeComponent();
             Colours = GetList();
             colourList.ItemsSource = Colours;
-            this.Appearing += Settings_Appearing;
+            this.Focused += Settings_Focused;
         }
+
+        private void Settings_Focused(object sender, FocusEventArgs e)
+        {
+            this.BindingContext = (Colour)App.Current.MainPage.BindingContext;
+            colourList.ItemsSource = GetList();
+        }
+
         public ObservableCollection<Colour> GetList()
         {
             var a = new ObservableCollection<Colour>();
             using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
             {
-                a = new ObservableCollection<Colour>((from c in App.db.Table<Colour>() where c.Purchased == true select c).ToList<Colour>() );
+                a = new ObservableCollection<Colour>((from c in App.db.Table<Colour>() where c.Purchased == true select c).ToList<Colour>()) ;
             }
             return a;
         }
-        private void Settings_Appearing(object sender, EventArgs e)
-        {
-            colourList.ItemsSource = GetList();
-            this.BindingContext = (Colour)App.Current.MainPage.BindingContext;
-        }
-
         private void Button_Clicked(object sender, EventArgs e)
         {
             var a = colourList.SelectedItem as Colour;
@@ -61,9 +62,10 @@ namespace Clicker
                 App.db.DropTable<Colour>();
             }
             Preferences.Clear();
-            App.CheckDbTablesExistance();
             App.TotalPointsOfTheUser = 0;
             App.MultiplierOfPoints = 1;
+            ClickerScreen.canHoldTheButton = false;
+            App.CheckDbTablesExistance();
         }
     }
     

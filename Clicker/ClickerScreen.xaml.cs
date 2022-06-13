@@ -20,6 +20,7 @@ namespace Clicker
             pointLabel.Text = ((int)App.TotalPointsOfTheUser).ToString() + "p";
             multLabel.Text = App.MultiplierOfPoints.ToString() + "x";
             this.Appearing += ClickerScreen_Appearing;
+            imgBtn.Source = Preferences.Get("Cup", "coffee.png");
         }
 
         private void ClickerScreen_Appearing(object sender, EventArgs e)
@@ -52,10 +53,6 @@ namespace Clicker
             pointLabel.Text = ((int)App.TotalPointsOfTheUser).ToString() + "p";
         }
 
-        public void MultUpdate(Label multLabel)
-        {
-            multLabel.Text = App.MultiplierOfPoints.ToString() + "x";
-        }
         private void imgBtn_Released(object sender, EventArgs e)
         {
             isHoldingThebutton = false;

@@ -22,7 +22,7 @@ namespace Clicker
         {
             InitializeComponent();
             UpdateLists();
-            this.Appearing += Upgrades_Appearing;
+            this.Focused += Upgrades_Appearing;
         }
 
         private void Upgrades_Appearing(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace Clicker
                 {
                     DoubleCorrectionVariable = down.Value + 1;
                 }
-                App.MultiplierOfPoints += DoubleCorrectionVariable;
+                App.MultiplierOfPoints *= DoubleCorrectionVariable;
                 App.TotalPointsOfTheUser -= down.Price;
                 down.Price *= rnd.Next(2, 6); ;
                 if (down.OneTimePurchase == 1)

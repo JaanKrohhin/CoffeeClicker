@@ -18,7 +18,7 @@ namespace Clicker
         {
             using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
             {
-                this.BindingContext = (from s in App.db.Table<Colour>() where s.IsActive == true select s).FirstOrDefault();
+                this.BindingContext = (from s in App.db.Table<Colour>() where s.IsActive == true select s).First();
             }
             InitializeComponent();
         }

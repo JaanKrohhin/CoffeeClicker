@@ -14,12 +14,12 @@
                                 <StackLayout Margin="5,0,0,0" WidthRequest="300">
                                     <FlexLayout>
                                         <Image Source="{Binding Picture}" HeightRequest="25" WidthRequest="25"></Image>
-                                        <Label Text="{Binding Name}" FontSize="Default" FontAttributes="Bold" TextColor="{Binding TextColour}"></Label>
+                                        <Label Text="{Binding Name}" FontSize="Default" FontAttributes="Bold" ></Label>
                                     </FlexLayout>
-                                    <Label Text="{Binding Price, StringFormat='Cost: {0}'}" FontSize="Default" FontAttributes="Italic" TextColor="{Binding TextColour}"></Label>
-                                    <Label Text="{Binding Description}" FontSize="Body" TextColor="{Binding TextColour}"></Label>
+                                    <Label Text="{Binding Price, StringFormat='Cost: {0}'}" FontSize="Default" FontAttributes="Italic" ></Label>
+                                    <Label Text="{Binding Description}" FontSize="Body"></Label>
                                 </StackLayout>
-                                <Button Text="{Binding Value, StringFormat='Buy {0}x'}" Clicked="Upgrade_Clicked" Margin="0,0,5,0" TextColor="{Binding TextColour}"></Button>
+                                <Button Text="{Binding Value, StringFormat='Buy {0}x'}" Clicked="Upgrade_Clicked" Margin="0,0,5,0"></Button>
                             </FlexLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -34,7 +34,7 @@
                                 <BoxView BackgroundColor="{Binding NavBar}" CornerRadius="360"></BoxView>
                                 <BoxView BackgroundColor="{Binding Background}"  CornerRadius="360"></BoxView>
                                 <BoxView BackgroundColor="{Binding TextColour}"  CornerRadius="360"></BoxView>
-                                <Button Text="{Binding Price, StringFormat='Buy for {0}p'}" Clicked="ColorPurchase" TextColor="{Binding TextColour}"></Button>
+                                <Button Text="{Binding Price, StringFormat='Buy for {0}p'}" Clicked="ColorPurchase"></Button>
                             </FlexLayout>
                         </ViewCell>
                     </DataTemplate>
