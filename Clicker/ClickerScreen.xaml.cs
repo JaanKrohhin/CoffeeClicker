@@ -20,7 +20,6 @@ namespace Clicker
             pointLabel.Text = ((int)App.TotalPointsOfTheUser).ToString() + "p";
             multLabel.Text = App.MultiplierOfPoints.ToString() + "x";
             this.Appearing += ClickerScreen_Appearing;
-            imgBtn.Source = Preferences.Get("Cup", "coffee.png");
         }
 
         private void ClickerScreen_Appearing(object sender, EventArgs e)

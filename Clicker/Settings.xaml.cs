@@ -28,7 +28,6 @@ namespace Clicker
         private void Settings_Focused(object sender, FocusEventArgs e)
         {
             this.BindingContext = (Colour)App.Current.MainPage.BindingContext;
-            colourList.ItemsSource = GetList();
         }
 
         public ObservableCollection<Colour> GetList()
@@ -40,18 +39,27 @@ namespace Clicker
             }
             return a;
         }
-        private void Button_Clicked(object sender, EventArgs e)
+        private void Reload(object sender, EventArgs e)
+        {
+            colourList.ClearValue(ListView.ItemsSourceProperty);
+            colourList.ItemsSource = GetList();
+        }
+            private void Button_Clicked(object sender, EventArgs e)
         {
             var a = colourList.SelectedItem as Colour;
-            var b = (Colour)App.Current.MainPage.BindingContext;
-            b.IsActive = false;
-            a.IsActive = true;
-            using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
-            {
-                App.db.Update(b);
-                App.db.Update(a);
+            if (a != null) 
+            { 
+                var b = (Colour)App.Current.MainPage.BindingContext;
+                b.IsActive = false;
+                a.IsActive = true;
+                using (App.db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.Name_of_Database)))
+                {
+                    App.db.Update(b);
+                    App.db.Update(a);
+                }
+                App.Current.MainPage.BindingContext = a;
             }
-            App.Current.MainPage.BindingContext = a;
+
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
@@ -66,6 +74,7 @@ namespace Clicker
             App.MultiplierOfPoints = 1;
             ClickerScreen.canHoldTheButton = false;
             App.CheckDbTablesExistance();
+            GetList();
         }
     }
     

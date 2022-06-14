@@ -7,7 +7,7 @@
             BarTextColor="{Binding TextColour}">
   <!--Pages can be added as references or inline-->
     <local:ClickerScreen IconImageSource="clicker.png"></local:ClickerScreen>
-    <local:Settings IconImageSource="settings.png"></local:Settings>
     <local:Upgrades IconImageSource="upgrade.png"></local:Upgrades>
+    <local:Settings IconImageSource="settings.png"></local:Settings>
     
 </TabbedPage>

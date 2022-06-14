@@ -20,6 +20,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <Button Text="Select" Clicked="Button_Clicked" HorizontalOptions="Center" CornerRadius="100"></Button>
+            <Button Text="Reload List" Clicked="Reload" HorizontalOptions="Center" CornerRadius="100"></Button>
             <Label Text="Data erasure" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Italic" TextColor="{Binding TextColour}"/>
             <Label Text="If you desire to start over from scratch, you may press the button below to erase all your progress until this point. This action cannot be undone." FontSize="Body" HorizontalOptions="Center" Margin="10,0" TextColor="{Binding TextColour}"/>
             <Button Text="ERASE ALL DATA" FontAttributes="Bold" Clicked="Button_Clicked_1" TextColor="{Binding TextColour}"></Button>
